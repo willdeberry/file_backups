@@ -117,7 +117,11 @@ SVNP_HUGE_REPO_EXCLUDE_PATH="nufw-svn$|/tags$|/branches$"
 SVNP_CHECK_DISTANT_REPO="1"
 . ~/bin/subversion-prompt
 
-export PS1="[ \w\$(__svn_stat) ]\$ "
+if [ -n $( which svn ) ]; then
+	export PS1="[ \w\$(__svn_stat) ]\$ "
+else
+	export PS1="[ \w\ ]\$ "
+fi
 
 bind '"\e[5~": history-search-backward'
 bind '"\e[6~": history-search-forward'
