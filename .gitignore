@@ -3,6 +3,11 @@
 code/
 Documents/
 Downloads/
+lol/
+kk/
+repos/
+realms-wiki/
+.cache/
 .vim/
 !.gitignore
 !.bashrc

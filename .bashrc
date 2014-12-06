@@ -103,24 +103,35 @@ PATH=~/bin:~/gwn_bin:/opt/android-sdk/platform-tools/:~/code/PLC/tools/report_pr
 export EDITOR=vim
 export VISUAL=vim
 export DEFAULT_APPSERVER_USER=wdeberry
-eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 
-xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
-xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
-xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
-xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5
-synclient TouchpadOff=$(synclient -l | grep -ce TouchpadOff.*0)
-xinput --disable $( xinput list --id-only "SynPS/2 Synaptics TouchPad" )
-setxkbmap -option ctrl:nocaps
+if [ -n "$( which keychain )" ]; then
+	eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+fi
+
+if [ -n "$( which xinput )" ]; then
+	xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
+	xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
+	xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
+	xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5
+	xinput --disable $( xinput list --id-only "SynPS/2 Synaptics TouchPad" )
+fi
+
+if [ -n "$( which synclient )" ]; then
+	synclient TouchpadOff=$(synclient -l | grep -ce TouchpadOff.*0)
+fi
+
+if [ -n "$( which setxkbmap )" ]; then
+	setxkbmap -option ctrl:nocaps
+fi
 
 SVNP_HUGE_REPO_EXCLUDE_PATH="nufw-svn$|/tags$|/branches$"
 SVNP_CHECK_DISTANT_REPO="1"
 . ~/bin/subversion-prompt
 
-if [ -n $( which svn ) ]; then
+if [ -n "$( which svn )" ]; then
 	export PS1="[ \w\$(__svn_stat) ]\$ "
 else
-	export PS1="[ \w\ ]\$ "
+	export PS1="[ \w ]\$ "
 fi
 
 bind '"\e[5~": history-search-backward'
