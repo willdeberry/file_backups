@@ -9,8 +9,8 @@ alias home='ssh home'
 alias service='sudo service'
 alias update='apt-get update; apt-get upgrade'
 alias sudo='sudo env PATH=$PATH $@'
-alias wow='wine "C:\Program Files\World of Warcraft\Wow.exe"'
 alias cp='rsync -azvP'
+alias rsync='cp'
 alias tmuxa='tmux attach-session -t Admin'
 
 # Entering a directory name as a bare word will change into that directory
