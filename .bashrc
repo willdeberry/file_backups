@@ -210,3 +210,11 @@ function svn-log-step() {
         fi
     done
 }
+
+function rsync-progress() {
+	local source="${1}"
+	local dest="${2}"
+	local command="rsync -azv"
+	local expected_lines="$( ${command} --dry-run ${source} ${dest} | wc -l )"
+	${command} ${source} ${dest} | pv --line-mode --size "${expected_lines}" --progress --timer --rate >/dev/null
+}
