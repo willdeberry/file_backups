@@ -50,6 +50,8 @@ set smartindent     " indent things for me
 set shiftround      " indenting when at column 3 will go to column 4, not 7
 set autoindent                  " indent at the same level of the previous line
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
+set list
+set listchars=tab:➪
 autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 """" Tabs
