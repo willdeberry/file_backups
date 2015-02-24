@@ -51,8 +51,14 @@ set shiftround      " indenting when at column 3 will go to column 4, not 7
 set autoindent                  " indent at the same level of the previous line
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 set list
-set listchars=tab:➪
+set listchars=""
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
+set listchars+=trail:.
+set listchars+=extends:>
+set listchars+=precedes:<
 autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+"Remove trailing whitespace on <leader>S
+nnoremap <leader>S :%s/\s\+$//<cr>:let @/=' '<CR>
 
 """" Tabs
 set tabpagemax=20
