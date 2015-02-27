@@ -134,9 +134,6 @@ else
 	export PS1="[ \w ]\$ "
 fi
 
-bind '"\e[5~": history-search-backward'
-bind '"\e[6~": history-search-forward'
-
 function svndiff() {
     svn diff "${@}" | colorize_diff | less
 }
