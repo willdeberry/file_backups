@@ -23,3 +23,5 @@
 [review "gerrit.aokp.co"]
 	username = hillbillyhacker86
 	email = hillbillyhacker86@gmail.com
+[http]
+	cookiefile = /home/will/.gitcookies
