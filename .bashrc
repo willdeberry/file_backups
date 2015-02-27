@@ -98,7 +98,6 @@ if ! shopt -oq posix; then
 fi
 
 ANDROID_HOME=~/documents/android-studio/sdk
-JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64/jre/
 PATH=~/bin:~/gwn_bin:/opt/android-sdk/platform-tools/:~/code/PLC/tools/report_processing_utilities/:~/code/PLC.SyncRoot/trunk/opt/scripts:~/code/misc/dcommit:$PATH
 export EDITOR=vim
 export VISUAL=vim
