@@ -42,9 +42,6 @@ nitrogen --restore &
 
 dropboxd &
 
-## Run the conky
-~/bin/rconky &
-
 # Autostart tilda
 tilda &
 

@@ -275,26 +275,26 @@
       </action>
     </keybind>
     <keybind key="C-Tab">
-       <action name="UnmaximizeFull"/>
-       <action name="MaximizeVert"/>
-       <action name="MoveResizeTo">
-         <width>800</width>
-       </action>
-       <action name="MoveToEdgeWest"/>
+      <action name="UnmaximizeFull"/>
+      <action name="MaximizeVert"/>
+      <action name="MoveResizeTo">
+        <width>800</width>
+      </action>
+      <action name="MoveToEdgeWest"/>
     </keybind>
     <keybind key="W-Tab">
-        <action name="UnmaximizeFull"/>
-        <action name="MaximizeVert"/>
-        <action name="MoveResizeTo">
-         <width>800</width>
-        </action>
-        <action name="MoveToEdgeEast"/>
+      <action name="UnmaximizeFull"/>
+      <action name="MaximizeVert"/>
+      <action name="MoveResizeTo">
+        <width>800</width>
+      </action>
+      <action name="MoveToEdgeEast"/>
     </keybind>
     <keybind key="W-Up">
-        <action name="MaximizeFull" />
+      <action name="MaximizeFull"/>
     </keybind>
     <keybind key="W-Down">
-        <action name="UnmaximizeFull" />
+      <action name="UnmaximizeFull"/>
     </keybind>
     <!-- Keybindings for window switching -->
     <keybind key="A-Tab">

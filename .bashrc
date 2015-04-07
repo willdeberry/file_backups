@@ -103,32 +103,32 @@ export EDITOR=vim
 export VISUAL=vim
 export DEFAULT_APPSERVER_USER=wdeberry
 
-if [ -n "$( which keychain )" ]; then
+if [ -s ~/.Xmodmap ]; then
+	xmodmap ~/.Xmodmap
+fi
+
+if which keychain &>/dev/null; then
 	eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 fi
 
-if [ -n "$( which xinput )" ]; then
+if xinput | grep -q IBM; then
 	xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
 	xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
 	xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
 	xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5
 	xinput --disable $( xinput list --id-only "SynPS/2 Synaptics TouchPad" )
-fi
-
-if [ -n "$( which synclient )" ]; then
 	synclient TouchpadOff=$(synclient -l | grep -ce TouchpadOff.*0)
 fi
 
-if [ -n "$( which setxkbmap )" ]; then
+if which setxkbmap &>/dev/null; then
 	setxkbmap -option ctrl:nocaps
 fi
 
-SVNP_HUGE_REPO_EXCLUDE_PATH="nufw-svn$|/tags$|/branches$"
-SVNP_CHECK_DISTANT_REPO="1"
-. ~/bin/subversion-prompt
-
-if [ -n "$( which svn )" ]; then
+if which svn &>/dev/null; then
 	export PS1="[ \w\$(__svn_stat) ]\$ "
+	SVNP_HUGE_REPO_EXCLUDE_PATH="nufw-svn$|/tags$|/branches$"
+	SVNP_CHECK_DISTANT_REPO="1"
+	source ~/bin/subversion-prompt
 else
 	export PS1="[ \w ]\$ "
 fi
