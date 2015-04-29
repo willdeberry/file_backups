@@ -107,6 +107,10 @@ if [ -s ~/.Xmodmap ]; then
 	xmodmap ~/.Xmodmap
 fi
 
+if [ -s ~/.xbindkeysrc ]; then
+	xbindkeys
+fi
+
 if which keychain &>/dev/null; then
 	eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 fi
