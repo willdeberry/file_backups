@@ -42,9 +42,7 @@ nitrogen --restore &
 
 dropboxd &
 
-# Autostart tilda
-tilda &
-
 numlockx &
 
 ~/bin/chrome-keys &
+~/bin/reverse_ssh &

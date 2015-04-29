@@ -12,6 +12,7 @@ alias sudo='sudo env PATH=$PATH $@'
 alias cp='rsync -azvP'
 alias rsync='cp'
 alias tmuxa='tmux attach-session -t Admin'
+alias vim='vim -p'
 
 # Entering a directory name as a bare word will change into that directory
 shopt -s autocd
