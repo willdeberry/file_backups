@@ -20,7 +20,7 @@ panel_monitor = 1
 panel_position = top left vertical
 panel_size = 100% 55
 panel_margin = -2 -1
-panel_padding = 0 0 10
+panel_padding = 0 0 8
 panel_dock = 0
 wm_menu = 1
 panel_layer = normal
@@ -67,10 +67,10 @@ font_shadow = 0
 
 # System Tray
 systray = 1
-systray_padding = 0 6 5
+systray_padding = 0 6 6
 systray_sort = ascending
 systray_background_id = 0
-systray_icon_size = 16
+systray_icon_size = 15
 systray_icon_asb = 100 0 0
 
 # Clock
