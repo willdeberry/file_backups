@@ -24,21 +24,11 @@ compton -CGb &
 ## Background
 nitrogen --restore &
 
-## Panel
-(sleep 1s && tint2) &
-
 ## Startup
 (sleep 1s && pnmixer) &
-#(sleep 3s && conky) &
 
 ## Optionally enable file manager in daemon mode for automounting
 (sleep 1s && thunar --daemon) &
-
-## Optionally enable screensaver
-#(sleep 1s && xautolock -time 15 -locker 'xlock -mode blank') &
-
-## Optionally disable touchpad
-#/usr/bin/synclient TouchpadOff=1 &
 
 dropboxd &
 
@@ -46,3 +36,4 @@ numlockx &
 
 ~/bin/chrome-keys &
 ~/bin/reverse_ssh &
+~/bin/docked -w
