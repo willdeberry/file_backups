@@ -13,6 +13,7 @@ realms-wiki/
 !.gitignore
 !.bashrc
 !.bash_aliases
+!.bash_functions
 !.vimrc
 !.gitconfig
 !.config/tilda/config_0
@@ -20,7 +21,6 @@ realms-wiki/
 !.config/openbox/menu.xml
 !.config/openbox/rc.xml
 !.config/tint2/default.tint2rc
-!.config/tint2/snap.jpg
 !.config/tint2/tint2confrc
 !.config/tint2/tint2rc
 !.config/tint2/tint2rc-iconified
