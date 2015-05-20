@@ -134,7 +134,7 @@ if which setxkbmap &>/dev/null; then
 	setxkbmap -option ctrl:nocaps
 fi
 
-if battery_status; then
+if battery_status &>/dev/null; then
 	BATTERY_STATUS="[ $(battery_status) ] "
 else
 	BATTERY_STATUS=""
