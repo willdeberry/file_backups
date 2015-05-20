@@ -215,6 +215,10 @@ function rsync-progress() {
 }
 
 battery_status() {
+	if [ ! -e "/sys/class/power_supply/BAT0/energy_now" ]; then
+		return 1
+	fi
+
 	local current="$(cat /sys/class/power_supply/BAT0/energy_now)"
 	local full="$(cat /sys/class/power_supply/BAT0/energy_full)"
 	local charge="$(echo "${current}/${full}*100" | bc -l | cut -c 1-5 | cut -d'.' -f1)"
