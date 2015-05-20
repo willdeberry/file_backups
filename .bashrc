@@ -115,10 +115,6 @@ if [ -s ~/.xbindkeysrc ]; then
 	xbindkeys
 fi
 
-if which keychain &>/dev/null; then
-	eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
-fi
-
 if which xinput &>/dev/null; then
 	if xinput | grep -q IBM; then
 		xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
@@ -132,6 +128,10 @@ fi
 
 if which setxkbmap &>/dev/null; then
 	setxkbmap -option ctrl:nocaps
+fi
+
+if which keychain &>/dev/null; then
+	eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 fi
 
 if battery_status &>/dev/null; then
