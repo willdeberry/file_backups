@@ -135,17 +135,17 @@ if which setxkbmap &>/dev/null; then
 fi
 
 if battery_status &>/dev/null; then
-	BATTERY_STATUS="[ $(battery_status) ] "
+	BATTERY_STATUS="[ \$(battery_status) ] "
 else
 	BATTERY_STATUS=""
 fi
 
 if which svn &>/dev/null; then
-	export PS1="\n${BATTERY_STATUS}[ $(date '+%R %F') ] [ \h ]\n[ \w\$(__svn_stat) ]\$ "
+	export PS1="\n${BATTERY_STATUS}[ \$(datetimestamp) ] [ \h ]\n[ \w\$(__svn_stat) ]\$ "
 	SVNP_HUGE_REPO_EXCLUDE_PATH="nufw-svn$|/tags$|/branches$"
 	SVNP_CHECK_DISTANT_REPO="1"
 	source ~/bin/subversion-prompt
 else
-	export PS1="\n${BATTERY_STATUS}[ $(date '+%R %F') ] [ \h ]\n[ \w ]\$ "
+	export PS1="\n${BATTERY_STATUS}[ \$(datetimestamp) ] [ \h ]\n[ \w ]\$ "
 fi
 

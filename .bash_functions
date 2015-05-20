@@ -1,4 +1,4 @@
-function colorize_diff() {
+colorize_diff() {
 	case "${#}" in
 		0)
 			local no_color="$( echo -e "\e[0m" )"
@@ -28,7 +28,7 @@ function colorize_diff() {
 	esac
 }
 
-function hilite() {
+hilite() {
 	if [ "${#}" -eq 0 ] ; then
 		cat <<END_OF_USAGE
 hilite [-i] PATTERN[:COLOR] [...]
@@ -132,11 +132,11 @@ END_OF_USAGE
 	rm -f "${patterns_file}"
 }
 
-function svndiff() {
+svndiff() {
 	svn diff "${@}" | colorize_diff | less
 }
 
-function svn-log-grep() {
+svn-log-grep() {
 	local reverse="-r"
 
 	if [ "${#}" -eq 0 ] || [ "${1}" == "-h" ] || [ "${1}" == "--help" ] ; then
@@ -174,7 +174,7 @@ END_OF_PROMPT
     done
 }
 
-function svn-log-step() {
+svn-log-step() {
 	local reverse=""
 
 	if [ "${#}" -eq 0 ] || [ "${1}" == "-h" ] || [ "${1}" == "--help" ] ; then
@@ -206,7 +206,7 @@ function svn-log-step() {
     done
 }
 
-function rsync-progress() {
+rsync-progress() {
 	local source="${1}"
 	local dest="${2}"
 	local command="rsync -azv"
@@ -244,4 +244,8 @@ battery_status() {
 	fi
 
 	echo -e "${color}${charge}%${none}"
+}
+
+datetimestamp() {
+	date '+%R %a %F'
 }
