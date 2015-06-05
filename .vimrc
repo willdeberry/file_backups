@@ -17,7 +17,7 @@ if !has('win32') && !has('win64')
 endif
 filetype plugin indent on       " Automatically detect file types.
 syntax on                       " syntax highlighting
-set colorcolumn=100
+set colorcolumn=120
 
 """" Searching
 " These two are convenient for searching, but cause pain with search/replace
