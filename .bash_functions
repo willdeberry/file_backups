@@ -251,5 +251,5 @@ datetimestamp() {
 }
 
 network_connection() {
-	nmcli c | awk '$4 == "wlp2s0" {print $1}'
+	nmcli dev status | awk '$3 == "connected" {print $4}' | head -n 1
 }
