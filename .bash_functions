@@ -210,8 +210,8 @@ rsync-progress() {
 	local source="${1}"
 	local dest="${2}"
 	local command="rsync -azv"
-	local expected_lines="$( ${command} --dry-run ${source} ${dest} | wc -l )"
-	${command} ${source} ${dest} | pv --line-mode --size "${expected_lines}" --progress --timer --rate >/dev/null
+	local expected_lines="$(${command} -n ${source} ${dest} | wc -l)"
+	${command} ${source} ${dest} | pv -ptlr -s "${expected_lines}" >/dev/null
 }
 
 battery_status() {
@@ -248,4 +248,8 @@ battery_status() {
 
 datetimestamp() {
 	date '+%R %a %F'
+}
+
+network_connection() {
+	nmcli c | awk '$4 == "wlp2s0" {print $1}'
 }

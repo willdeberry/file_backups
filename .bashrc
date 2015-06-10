@@ -140,12 +140,18 @@ else
 	BATTERY_STATUS=""
 fi
 
+if which nmcli &>/dev/null; then
+	NETWORK_CONNECTION=" [ \$(network_connection) ] "
+else
+	NETWORK_CONNECTION=" [ Wired Connection 1 ] "
+fi
+
 if which svn &>/dev/null; then
-	export PS1="\n${BATTERY_STATUS}[ \$(datetimestamp) ] [ \h ]\n[ \w\$(__svn_stat) ]\$ "
+	export PS1="\n${BATTERY_STATUS}[ \$(datetimestamp) ]${NETWORK_CONNECTION}[ \h ]\n[ \w\$(__svn_stat) ]\$ "
 	SVNP_HUGE_REPO_EXCLUDE_PATH="nufw-svn$|/tags$|/branches$"
 	SVNP_CHECK_DISTANT_REPO="1"
 	source ~/bin/subversion-prompt
 else
-	export PS1="\n${BATTERY_STATUS}[ \$(datetimestamp) ] [ \h ]\n[ \w ]\$ "
+	export PS1="\n${BATTERY_STATUS}[ \$(datetimestamp) ]${NETWORK_CONNECTION}[ \h ]\n[ \w ]\$ "
 fi
 
