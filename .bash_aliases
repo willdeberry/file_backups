@@ -13,6 +13,7 @@ alias cp='rsync -azvP'
 alias rsync='cp'
 alias tmuxa='tmux attach-session -t Admin'
 alias vim='vim -p'
+alias unban='sudo fail2ban-client set ssh unbanip'
 
 # Entering a directory name as a bare word will change into that directory
 shopt -s autocd
