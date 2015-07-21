@@ -140,7 +140,7 @@ else
 	BATTERY_STATUS=""
 fi
 
-if which nmcli &>/dev/null; then
+if which nmcli --nocheck &>/dev/null; then
 	NETWORK_CONNECTION=" [ \$(network_connection) ] "
 else
 	NETWORK_CONNECTION=" [ Wired Connection 1 ] "
