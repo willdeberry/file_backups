@@ -12,6 +12,7 @@ alias cp='rsync -azvP'
 alias tmuxa='tmux attach-session -t Admin'
 alias vim='vim -p'
 alias sudo='sudo env PATH=$PATH $@'
+alias unban='sudo fail2ban-client set ssh unbanip'
 
 # Entering a directory name as a bare word will change into that directory
 shopt -s autocd
