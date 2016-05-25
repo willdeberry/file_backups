@@ -3,6 +3,8 @@ set laststatus=0
 set nocompatible
 
 """" Editor behavior and appearance
+set encoding=utf-8          " UTF-8, please
+set nobomb                  " without byte-order mark
 set nu                          " Line numbers on
 set scrolljump=5                " lines to scroll when cursor leaves screen
 set scrolloff=3                 " minimum lines to keep above and below cursor
@@ -20,9 +22,6 @@ syntax on                       " syntax highlighting
 set colorcolumn=120
 
 """" Searching
-" These two are convenient for searching, but cause pain with search/replace
-"set ignorecase      " Case insensitive search...
-"set smartcase       " ... unless search includes capital letters
 " spacebar kills current search highlighting and clears commandline residue
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
@@ -72,6 +71,7 @@ highlight TabLineFill term=NONE cterm=NONE ctermfg=black  ctermbg=gray
 set noswapfile
 set nobackup
 set nowb
+
 """ keep undo history across sessions by storing in file
 silent !mkdir ~/.vim/backups > /dev/null 2>&1
 set undodir=~/.vim/backups
@@ -88,15 +88,10 @@ nnoremap K <C-y>
 nnoremap n nzz
 nnoremap N Nzz
 
-" I find myself hitting ma to move to bookmark "a", let's fix that
-nnoremap M m
-nnoremap m `
-
 " work around a problem with smartindent
 inoremap # X#
 
 """" Completion
-
 " scan the current buffer, other windows, and included files
 set complete=.,w,i
 
@@ -112,16 +107,6 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 """ Command overrides
 cnoremap sudow w !sudo tee % >/dev/null
-
-"""" File encodings
-set encoding=utf-8          " UTF-8, please
-set nobomb                  " without byte-order mark
-
-filetype plugin indent on   " required!
-" ,v brings up my .vimrc
-" ,V reloads it -- making all changes active (have to save first)
-map <leader>v :sp ~/.vimrc<CR><C-W>_
-map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 function! InitializeDirectories()
   let separator = "."

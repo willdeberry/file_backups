@@ -25,3 +25,5 @@
 	email = hillbillyhacker86@gmail.com
 [http]
 	cookiefile = /home/will/.gitcookies
+[push]
+	default = simple
