@@ -7,23 +7,24 @@
 	tool = emerge
 [core]
 	editor = vim
+	autocrlf = input
+	ignorecase = false
+	pager = less -F -X
 [github]
 	user = hillbillyhacker86
 	token = aadb096af8d7ecb79bd21ac6c5d8cc14
 [review "gerrit.sudoservers.com"]
 	username = hillbillyhacker86
 [alias]
-    lg = log --pretty=oneline --abbrev-commit
-    ca = commit -a
-    cl = clean -i
-    cp = cherry-pick
-    co = checkout
-    st = status
-    mt = mergetool
+	lg = log --oneline --graph --decorate
+	ca = commit -a
+	cl = clean -i
+	cp = cherry-pick
+	co = checkout
+	st = status
+	mt = mergetool
 [review "gerrit.aokp.co"]
 	username = hillbillyhacker86
 	email = hillbillyhacker86@gmail.com
-[http]
-	cookiefile = /home/will/.gitcookies
 [push]
 	default = simple
