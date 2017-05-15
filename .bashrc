@@ -28,7 +28,7 @@ shopt -s checkwinsize
 #shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
-#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -37,7 +37,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+    xterm-color|*-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -56,9 +56,21 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -67,15 +79,22 @@ if [ -x /usr/bin/dircolors ]; then
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
-    #alias grep='grep --color=auto'
-    #alias fgrep='fgrep --color=auto'
-    #alias egrep='egrep --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 fi
 
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
 # some more ls aliases
-alias ll='ls -l'
-#alias la='ls -A'
-#alias l='ls -CF'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -84,11 +103,6 @@ alias ll='ls -l'
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
-fi
-
-# Function definitions
-if [ -f ~/.bash_functions ]; then
-    . ~/.bash_functions
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -102,56 +116,20 @@ if ! shopt -oq posix; then
   fi
 fi
 
-ANDROID_HOME=~/documents/android-studio/sdk
-PATH=~/bin:~/gwn_bin:/opt/android-sdk/platform-tools/:~/code/PLC/tools/report_processing_utilities/:~/code/PLC.SyncRoot/trunk/opt/scripts:~/code/misc/dcommit:$PATH
+if which keychain &>/dev/null; then
+	eval $(keychain --eval --quiet id_rsa)
+fi
+
 export EDITOR=vim
 export VISUAL=vim
+export DEBEMAIL='wdeberry@getwellnetwork.com'
 
-if [ -s ~/.Xmodmap ]; then
-	xmodmap ~/.Xmodmap
-fi
+_xfunc git __git_complete gp _git_push
+_xfunc git __git_complete gl _git_pull
 
-if [ -s ~/.xbindkeysrc ]; then
-	xbindkeys
-fi
-
-if which xinput &>/dev/null; then
-	if xinput | grep -q IBM; then
-		xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
-		xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
-		xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
-		xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5
-		xinput --disable $( xinput list --id-only "SynPS/2 Synaptics TouchPad" )
-		synclient TouchpadOff=$(synclient -l | grep -ce TouchpadOff.*0)
-	fi
-fi
-
-if which setxkbmap &>/dev/null; then
-	setxkbmap -option ctrl:nocaps
-fi
-
-if which keychain &>/dev/null; then
-	eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
-fi
-
-if battery_status &>/dev/null; then
-	BATTERY_STATUS="[ \$(battery_status) ] "
-else
-	BATTERY_STATUS=""
-fi
-
-if which nmcli --nocheck &>/dev/null; then
-	NETWORK_CONNECTION=" [ \$(network_connection) ] "
-else
-	NETWORK_CONNECTION=" [ Wired Connection 1 ] "
-fi
-
-if which svn &>/dev/null; then
-	export PS1="\n${BATTERY_STATUS}[ \$(datetimestamp) ]${NETWORK_CONNECTION}[ \h ]\n[ \w\$(__svn_stat) ]\$ "
-	SVNP_HUGE_REPO_EXCLUDE_PATH="nufw-svn$|/tags$|/branches$"
-	SVNP_CHECK_DISTANT_REPO="1"
-	source ~/bin/subversion-prompt
-else
-	export PS1="\n${BATTERY_STATUS}[ \$(datetimestamp) ]${NETWORK_CONNECTION}[ \h ]\n[ \w ]\$ "
-fi
-
+alias gp='git push'
+alias gpt='git push --tags'
+alias gl='git pull'
+alias vim='vim -p'
+alias update='sudo apt update && sudo apt dist-upgrade'
+alias clean='rm -f *.xz *.deb *.dsc *.changes *.build *.gz'
