@@ -47,12 +47,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-	color_prompt=
+    color_prompt=
     fi
 fi
 
@@ -117,12 +117,24 @@ if ! shopt -oq posix; then
 fi
 
 if which keychain &>/dev/null; then
-	eval $(keychain --eval --quiet id_rsa)
+    eval $(keychain --eval --quiet id_rsa)
+fi
+
+function _update_ps1() {
+    PS1="$(~/go/bin/powerline-go -error $? -modules 'user,host,cwd,perms,git,exit')"
+}
+
+if [ "$TERM" != "linux" ]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
 
 export EDITOR=vim
 export VISUAL=vim
-export DEBEMAIL='wdeberry@getwellnetwork.com'
+export DEBFULLNAME='Will DeBerry'
+export DEBEMAIL='willdeberry@gmail.com'
+export GOPATH=${HOME}/go
+
+PATH=$GOPATH:$PATH
 
 _xfunc git __git_complete gp _git_push
 _xfunc git __git_complete gl _git_pull
@@ -133,3 +145,4 @@ alias gl='git pull'
 alias vim='vim -p'
 alias update='sudo apt update && sudo apt dist-upgrade'
 alias clean='rm -f *.xz *.deb *.dsc *.changes *.build *.gz'
+alias home='ssh home'
